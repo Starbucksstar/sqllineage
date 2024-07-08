@@ -1,3 +1,4 @@
+import ast
 import logging
 from argparse import Namespace
 from typing import List
@@ -25,12 +26,13 @@ def escape_identifier_name(name: str):
         return name.lower()
 
 
-def extract_sql_from_args(args: Namespace) -> str:
-    sql = ""
+def extract_sql_from_args(args: Namespace) -> List[str]:
+    sql_list = []
     if getattr(args, "f", None):
         try:
             with open(args.f) as f:
                 sql = f.read()
+                sql_list.append(sql)
         except IsADirectoryError:
             logger.exception("%s is a directory", args.f)
             exit(1)
@@ -42,8 +44,11 @@ def extract_sql_from_args(args: Namespace) -> str:
             logger.exception("Permission denied when reading file '%s'", args.f)
             exit(1)
     elif getattr(args, "e", None):
-        sql = args.e
-    return sql
+        if type(args.e) is list:
+            sql_list = args.e
+        elif type(args.e) is str:
+            sql_list = ast.literal_eval(args.e)
+    return sql_list
 
 
 def split(sql: str) -> List[str]:

@@ -34,9 +34,9 @@ def test_handler():
     assert container.status.startswith(str(HTTPStatus.OK.value))
     mock_request("GET", "/manifest.json")
     assert container.status.startswith(str(HTTPStatus.OK.value))
-    mock_request("POST", "/lineage", {"e": "SELECT * FROM dual", "p": 5000})
+    mock_request("POST", "/lineage", {"e": ["SELECT * FROM dual"], "p": 5000})
     assert container.status.startswith(str(HTTPStatus.OK.value))
-    mock_request("POST", "/script", {"e": "SELECT * FROM dual", "p": 5000})
+    mock_request("POST", "/script", {"e": ["SELECT * FROM dual"], "p": 5000})
     assert container.status.startswith(str(HTTPStatus.OK.value))
     mock_request(
         "POST",
@@ -55,7 +55,7 @@ def test_handler():
     mock_request("OPTIONS", "/directory", {})
     assert container.status.startswith(str(HTTPStatus.OK.value))
     # 400
-    mock_request("POST", "/lineage", {"e": "SELECT * FROM where foo='bar'"})
+    mock_request("POST", "/lineage", {"e": ["SELECT * FROM where foo='bar'"]})
     assert container.status.startswith(str(HTTPStatus.BAD_REQUEST.value))
     # 403
     mock_request("POST", "/directory", {"f": "/etc/passwd"})
@@ -73,7 +73,9 @@ def test_handler():
         {"f": os.path.join(SQLLineageConfig.DIRECTORY, "tpcds/query100.sql")},
     )
     assert container.status.startswith(str(HTTPStatus.NOT_FOUND.value))
-    mock_request("POST", "/non-exist-resource", {"e": "SELECT * FROM where foo='bar'"})
+    mock_request(
+        "POST", "/non-exist-resource", {"e": ["SELECT * FROM where foo='bar'"]}
+    )
     assert container.status.startswith(str(HTTPStatus.NOT_FOUND.value))
     mock_request("GET", "/../cli.py")
     assert container.status.startswith(str(HTTPStatus.NOT_FOUND.value))

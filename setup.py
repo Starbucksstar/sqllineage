@@ -43,8 +43,8 @@ class EggInfoWithJS(egg_info):
 setup(
     name=NAME,
     version=VERSION,
-    author="Reata",
-    author_email="reddevil.hjw@gmail.com",
+    author="gaoxing",
+    author_email="gao.xing@thoughtworks.com",
     description="SQL Lineage Analysis Tool powered by Python",
     long_description=long_description,
     long_description_content_type="text/markdown",

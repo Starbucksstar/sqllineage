@@ -165,10 +165,10 @@ def lineage(payload):
     from sqllineage.runner import LineageRunner
 
     req_args = Namespace(**payload)
-    sql = extract_sql_from_args(req_args)
+    sql_list = extract_sql_from_args(req_args)
     dialect = getattr(req_args, "dialect", DEFAULT_DIALECT)
     lr = LineageRunner(
-        sql, dialect=dialect, verbose=True, metadata_provider=app.metadata_provider
+        sql_list, dialect=dialect, verbose=True, metadata_provider=app.metadata_provider
     )
     data = {
         "verbose": str(lr),

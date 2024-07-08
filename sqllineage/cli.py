@@ -36,7 +36,10 @@ def main(args=None) -> None:
         "--version", action="version", version="%s %s" % (MAIN_NAME, MAIN_VERSION)
     )
     parser.add_argument(
-        "-e", metavar="<quoted-query-string>", help="SQL from command line"
+        "-e",
+        nargs="+",
+        metavar="<sql content string> ...",
+        help="SQL List from command line",
     )
     parser.add_argument("-f", metavar="<filename>", help="SQL from files")
     parser.add_argument(
@@ -107,9 +110,9 @@ def main(args=None) -> None:
     if args.e and args.f:
         warnings.warn("Both -e and -f options are specified. -e option will be ignored")
     if args.f or args.e:
-        sql = extract_sql_from_args(args)
+        sql_list = extract_sql_from_args(args)
         runner = LineageRunner(
-            sql,
+            sql=sql_list,
             dialect=args.dialect,
             metadata_provider=metadata_provider,
             verbose=args.verbose,

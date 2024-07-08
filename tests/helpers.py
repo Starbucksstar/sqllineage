@@ -61,8 +61,8 @@ def assert_table_lineage_equal(
     test_sqlfluff: bool = True,
     test_sqlparse: bool = True,
 ):
-    lr = LineageRunner(sql, dialect=SQLPARSE_DIALECT)
-    lr_sqlfluff = LineageRunner(sql, dialect=dialect)
+    lr = LineageRunner([sql], dialect=SQLPARSE_DIALECT)
+    lr_sqlfluff = LineageRunner([sql], dialect=dialect)
     if test_sqlparse:
         _assert_table_lineage(lr, source_tables, target_tables)
     if test_sqlfluff:
@@ -81,10 +81,10 @@ def assert_column_lineage_equal(
         DummyMetaDataProvider() if metadata_provider is None else metadata_provider
     )
     lr = LineageRunner(
-        sql, dialect=SQLPARSE_DIALECT, metadata_provider=metadata_provider
+        [sql], dialect=SQLPARSE_DIALECT, metadata_provider=metadata_provider
     )
     lr_sqlfluff = LineageRunner(
-        sql, dialect=dialect, metadata_provider=metadata_provider
+        [sql], dialect=dialect, metadata_provider=metadata_provider
     )
     if test_sqlparse:
         _assert_column_lineage(lr, column_lineages)

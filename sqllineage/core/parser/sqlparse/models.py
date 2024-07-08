@@ -109,7 +109,7 @@ class SqlParseColumn(Column):
                 src_cols = [
                     lineage[0]
                     for lineage in LineageRunner(
-                        token.value, dialect=SQLPARSE_DIALECT
+                        [token.value], dialect=SQLPARSE_DIALECT
                     ).get_column_lineage(exclude_path_ending_in_subquery=False)
                 ]
                 source_columns = [

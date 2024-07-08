@@ -65,7 +65,7 @@ def test_disable_update_unknown_config():
 def _check_schema(schema: str):
     # used by test_config_parallel, must be a global function so that it can be pickled between processes
     with SQLLineageConfig(DEFAULT_SCHEMA=schema):
-        table = LineageRunner("select * from test").source_tables.pop()
+        table = LineageRunner(["select * from test"]).source_tables.pop()
         # randomly sleep [0, 0.1) second to simulate real parsing scenario
         time.sleep(random.random() * 0.1)
         return table.schema.raw_name

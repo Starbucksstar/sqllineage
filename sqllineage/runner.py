@@ -36,7 +36,7 @@ def lazy_property(func):
 class LineageRunner(object):
     def __init__(
         self,
-        sql: str,
+        sql: List[str],
         dialect: str = DEFAULT_DIALECT,
         metadata_provider: MetaDataProvider = DummyMetaDataProvider(),
         verbose: bool = False,
@@ -46,7 +46,7 @@ class LineageRunner(object):
         """
         The entry point of SQLLineage after command line options are parsed.
 
-        :param sql: a string representation of SQL statements.
+        :param sql: a string list representation of SQL statements.
         :param dialect: sql dialect
         :param metadata_provider: metadata service object providing table schema
         :param verbose: verbose flag indicating whether statement-wise lineage result will be shown
@@ -186,13 +186,19 @@ Target Tables:
             else SqlFluffLineageAnalyzer(self._dialect, self._silent_mode)
         )
         if SQLLineageConfig.TSQL_NO_SEMICOLON and self._dialect == "tsql":
-            self._stmt = analyzer.split_tsql(self._sql.strip())
+            for sql in self._sql:
+                stm = analyzer.split_tsql(sql.strip())
+                self._stmt.extend(stm)
         else:
             if SQLLineageConfig.TSQL_NO_SEMICOLON and self._dialect != "tsql":
                 warnings.warn(
                     f"Dialect={self._dialect}, TSQL_NO_SEMICOLON will be ignored unless dialect is tsql"
                 )
-            self._stmt = split(self._sql.strip())
+            stmt_list = []
+            for sql in self._sql:
+                stmt = split(sql.strip())
+                stmt_list.extend(stmt)
+            self._stmt = stmt_list
 
         with self._metadata_provider.session() as session:
             stmt_holders = []
