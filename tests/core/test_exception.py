@@ -3,13 +3,13 @@ from unittest.mock import patch
 
 import pytest
 
-from sqllineage import SQLPARSE_DIALECT
-from sqllineage.exceptions import (
+from starlineage import SQLPARSE_DIALECT
+from starlineage.exceptions import (
     InvalidSyntaxException,
     SQLLineageException,
     UnsupportedStatementException,
 )
-from sqllineage.runner import LineageRunner
+from starlineage.runner import LineageRunner
 
 
 def test_select_without_table():

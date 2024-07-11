@@ -1,5 +1,5 @@
 include LICENSE
 include README.md
-recursive-include sqllineage/build *
-recursive-include sqllineagejs/ *
-prune sqllineagejs/node_modules
+recursive-include starlineage/build *
+recursive-include starlineagejs/ *
+prune starlineagejs/node_modules

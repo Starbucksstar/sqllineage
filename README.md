@@ -1,4 +1,5 @@
-# SQLLineage
+# StarLineage
+**Based on open source sqllineage built, enhance multiple sql file lineage analysis.**
 SQL Lineage Analysis Tool powered by Python
 
 [![image](https://img.shields.io/pypi/v/sqllineage.svg)](https://pypi.org/project/sqllineage/)
@@ -29,12 +30,12 @@ Talk is cheap, show me a [demo](https://reata.github.io/sqllineage/).
 ## Quick Start
 Install sqllineage via PyPI:
 ```bash
-$ pip install sqllineage
+$ pip install starlineage
 ```
 
-Using sqllineage command to parse a quoted-query-string:
+Using starlineage command to parse a quoted-query-string:
 ```
-$ sqllineage -e "insert into db1.table1 select * from db2.table2"
+$ starlineage -e "insert into db1.table1 select * from db2.table2"
 Statements(#): 1
 Source Tables:
     db2.table2
@@ -44,7 +45,7 @@ Target Tables:
 
 Or you can parse a SQL file with -f option:
 ```
-$ sqllineage -f foo.sql
+$ starlineage -f foo.sql
 Statements(#): 1
 Source Tables:
     db1.table_foo
@@ -58,7 +59,7 @@ Target Tables:
 ### Multiple SQL Statements
 Lineage is combined from multiple SQL statements, with intermediate tables identified:
 ```
-$ sqllineage -e "insert into db1.table1 select * from db2.table2; insert into db3.table3 select * from db1.table1;"
+$ starlineage -e "insert into db1.table1 select * from db2.table2; insert into db3.table3 select * from db1.table1;"
 Statements(#): 2
 Source Tables:
     db2.table2
@@ -71,7 +72,7 @@ Intermediate Tables:
 ### Verbose Lineage Result
 And if you want to see lineage for each SQL statement, just toggle verbose option
 ```
-$ sqllineage -v -e "insert into db1.table1 select * from db2.table2; insert into db3.table3 select * from db1.table1;"
+$ starlineage -v -e "insert into db1.table1 select * from db2.table2; insert into db3.table3 select * from db1.table1;"
 Statement #1: insert into db1.table1 select * from db2.table2;
     table read: [Table: db2.table2]
     table write: [Table: db1.table1]
@@ -105,15 +106,15 @@ Take below example, `INSERT OVERWRITE` statement is only supported by big data s
 is a reserved keyword in Hive thus can not be used as table name while it is not for SparkSQL. Both ansi and hive dialect
 tell you this causes syntax error and sparksql gives the correct result:
 ```
-$ sqllineage -e "INSERT OVERWRITE TABLE map SELECT * FROM foo"
+$ starlineage -e "INSERT OVERWRITE TABLE map SELECT * FROM foo"
 ...
 sqllineage.exceptions.InvalidSyntaxException: This SQL statement is unparsable, please check potential syntax error for SQL
 
-$ sqllineage -e "INSERT OVERWRITE TABLE map SELECT * FROM foo" --dialect=hive
+$ starlineage -e "INSERT OVERWRITE TABLE map SELECT * FROM foo" --dialect=hive
 ...
 sqllineage.exceptions.InvalidSyntaxException: This SQL statement is unparsable, please check potential syntax error for SQL
 
-$ sqllineage -e "INSERT OVERWRITE TABLE map SELECT * FROM foo" --dialect=sparksql
+$ starlineage -e "INSERT OVERWRITE TABLE map SELECT * FROM foo" --dialect=sparksql
 Statements(#): 1
 Source Tables:
     <default>.foo
@@ -121,7 +122,7 @@ Target Tables:
     <default>.map
 ```
 
-Use `sqllineage --dialects` to see all available dialects.
+Use `starlineage --dialects` to see all available dialects.
 
 ### Column-Level Lineage
 We also support column level lineage in command line interface, set level option to column, all column lineage path will 
@@ -154,7 +155,7 @@ FROM foo a
 Suppose this sql is stored in a file called test.sql
 
 ```
-$ sqllineage -f test.sql -l column
+$ starlineage -f test.sql -l column
 <default>.corge.col1 <- <default>.foo.col1 <- <default>.bar.col1
 <default>.corge.col2 <- <default>.foo.col2 <- <default>.baz.col1
 <default>.corge.col2 <- <default>.grault.col2
@@ -182,7 +183,7 @@ sqlite3 db.db 'CREATE TABLE IF NOT EXISTS quux (quux_id int, col5 int, col6 int)
 
 Now given the same SQL, column lineage is fully resolved.
 ```shell
-$ SQLLINEAGE_DEFAULT_SCHEMA=main sqllineage -f test.sql -l column --sqlalchemy_url=sqlite:///db.db
+$ SQLLINEAGE_DEFAULT_SCHEMA=main starlineage -f test.sql -l column --sqlalchemy_url=sqlite:///db.db
 main.corge.col1 <- main.foo.col1 <- main.bar.col1
 main.corge.col2 <- main.foo.col2 <- main.bar.col1
 main.corge.col2 <- main.grault.col2

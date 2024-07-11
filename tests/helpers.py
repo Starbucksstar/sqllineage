@@ -11,12 +11,12 @@ from sqlalchemy import (
     text,
 )
 
-from sqllineage import SQLPARSE_DIALECT
-from sqllineage.core.metadata.dummy import DummyMetaDataProvider
-from sqllineage.core.metadata.sqlalchemy import SQLAlchemyMetaDataProvider
-from sqllineage.core.metadata_provider import MetaDataProvider
-from sqllineage.core.models import Column, Table
-from sqllineage.runner import LineageRunner
+from starlineage import SQLPARSE_DIALECT
+from starlineage.core.metadata.dummy import DummyMetaDataProvider
+from starlineage.core.metadata.sqlalchemy import SQLAlchemyMetaDataProvider
+from starlineage.core.metadata_provider import MetaDataProvider
+from starlineage.core.models import Column, Table
+from starlineage.runner import LineageRunner
 
 
 def _assert_table_lineage(lr: LineageRunner, source_tables=None, target_tables=None):

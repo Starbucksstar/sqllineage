@@ -1,4 +1,4 @@
-from sqllineage.core.holders import StatementLineageHolder
+from starlineage.core.holders import StatementLineageHolder
 
 
 def test_dummy():

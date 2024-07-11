@@ -4,8 +4,8 @@ from unittest.mock import patch
 
 import pytest
 
-from sqllineage.cli import main
-from sqllineage.config import SQLLineageConfig
+from starlineage.cli import main
+from starlineage.config import SQLLineageConfig
 
 
 @patch("socketserver.BaseServer.serve_forever")

@@ -1,4 +1,4 @@
-from sqllineage.utils.entities import ColumnQualifierTuple
+from starlineage.utils.entities import ColumnQualifierTuple
 from ...helpers import assert_column_lineage_equal
 
 

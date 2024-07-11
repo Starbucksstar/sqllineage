@@ -2,8 +2,8 @@ from unittest.mock import Mock
 
 from sqlfluff.core import Linter
 
-from sqllineage.core.parser.sqlfluff.models import SqlFluffColumn
-from sqllineage.core.parser.sqlfluff.utils import find_from_expression_element
+from starlineage.core.parser.sqlfluff.models import SqlFluffColumn
+from starlineage.core.parser.sqlfluff.utils import find_from_expression_element
 
 
 def test_column_extract_source_columns():

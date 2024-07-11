@@ -7,7 +7,7 @@ import subprocess
 from setuptools import find_packages, setup
 from setuptools.command.egg_info import egg_info
 
-from sqllineage import NAME, STATIC_FOLDER, VERSION
+from starlineage import NAME, STATIC_FOLDER, VERSION
 
 with open("README.md", "r") as f:
     long_description = f.read()
@@ -28,7 +28,7 @@ class EggInfoWithJS(egg_info):
         if os.path.exists(static_path) or "READTHEDOCS" in os.environ:
             pass
         else:
-            js_path = "sqllineagejs"
+            js_path = "starlineagejs"
             use_shell = True if platform.system() == "Windows" else False
             subprocess.check_call(
                 shlex.split("npm install"), cwd=js_path, shell=use_shell
@@ -43,12 +43,12 @@ class EggInfoWithJS(egg_info):
 setup(
     name=NAME,
     version=VERSION,
-    author="gaoxing",
-    author_email="gao.xing@thoughtworks.com",
+    author="starbucks",
+    author_email="solitarymanstar@gmail.com",
     description="SQL Lineage Analysis Tool powered by Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/reata/sqllineage",
+    url="https://github.com/Starbucks123456/sqllineage",
     packages=find_packages(exclude=("tests",)),
     package_data={"": [f"{STATIC_FOLDER}/*", f"{STATIC_FOLDER}/**/**/*", "data/**/*"]},
     include_package_data=True,
@@ -71,7 +71,7 @@ setup(
         "sqlfluff==3.0.5",
         "sqlalchemy>=2.0.0",
     ],
-    entry_points={"console_scripts": ["sqllineage = sqllineage.cli:main"]},
+    entry_points={"console_scripts": ["starlineage = starlineage.cli:main"]},
     extras_require={
         "ci": [
             "bandit",

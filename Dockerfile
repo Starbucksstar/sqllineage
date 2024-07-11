@@ -2,8 +2,8 @@ FROM nikolaik/python-nodejs:python3.10-nodejs18-slim
 
 # copy source files to docker image
 ARG CWD=/mnt/sqllineage
-ADD sqllineage/ ${CWD}/sqllineage
-ADD sqllineagejs/ ${CWD}/sqllineagejs
+ADD starlineage/ ${CWD}/sqllineage
+ADD starlineagejs/ ${CWD}/sqllineagejs
 COPY setup.py README.md ${CWD}/
 WORKDIR ${CWD}
 

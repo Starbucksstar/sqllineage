@@ -4,8 +4,8 @@ from collections import namedtuple
 from http import HTTPStatus
 from io import StringIO
 
-from sqllineage.config import SQLLineageConfig
-from sqllineage.drawing import app
+from starlineage.config import SQLLineageConfig
+from starlineage.drawing import app
 
 
 def test_handler():

@@ -3,7 +3,7 @@ specify columns in CREATE/INSERT statement.
 DO NOT support this feature with non-validating dialect because sqlparse would parse table/view name as function call
 """
 
-from sqllineage.utils.entities import ColumnQualifierTuple
+from starlineage.utils.entities import ColumnQualifierTuple
 from ...helpers import assert_column_lineage_equal, assert_table_lineage_equal
 
 

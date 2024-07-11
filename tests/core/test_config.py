@@ -6,9 +6,9 @@ from unittest.mock import patch
 
 import pytest
 
-from sqllineage.config import SQLLineageConfig
-from sqllineage.exceptions import ConfigException
-from sqllineage.runner import LineageRunner
+from starlineage.config import SQLLineageConfig
+from starlineage.exceptions import ConfigException
+from starlineage.runner import LineageRunner
 
 
 @patch.dict(

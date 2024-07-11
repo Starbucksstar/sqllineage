@@ -22,7 +22,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.abspath(".."))
 
-from sqllineage import NAME, VERSION  # noqa
+from starlineage import NAME, VERSION  # noqa
 
 project = NAME
 copyright = f"2019-{datetime.now().year}, Reata"  # noqa

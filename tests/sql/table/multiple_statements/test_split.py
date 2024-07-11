@@ -1,4 +1,4 @@
-from sqllineage.utils.helpers import split
+from starlineage.utils.helpers import split
 
 
 def test_split_statements():

@@ -2,8 +2,8 @@ import os
 
 import pytest
 
-from sqllineage.core.metadata.sqlalchemy import SQLAlchemyMetaDataProvider
-from sqllineage.exceptions import MetaDataProviderException
+from starlineage.core.metadata.sqlalchemy import SQLAlchemyMetaDataProvider
+from starlineage.exceptions import MetaDataProviderException
 
 
 def test_sqlalchemy_metadata_provider_connection_fail():
