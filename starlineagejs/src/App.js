@@ -193,7 +193,7 @@ export default function App() {
                 {drawerOpen ? <ChevronLeftIcon/> : <MenuIcon/>}
               </IconButton>
               <Typography variant="h6" className={classes.title}>
-                SQLLineage
+                DataLineage
               </Typography>
 
               <Tooltip title="Change SQL dialect" arrow>

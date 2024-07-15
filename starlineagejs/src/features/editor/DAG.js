@@ -179,7 +179,7 @@ export function DAG(props) {
     let message, info = false;
     if (editorState.editable) {
       if (editorState.contentComposed === "") {
-        message = "Welcome to SQLLineage Playground.\n" +
+        message = "Welcome to StarLineage Playground.\n" +
           "Just paste your SQL in Script View and switch back here, you'll get DAG visualization for your SQL code.\n" +
           "Or select SQL file on the left directory tree for visualization.\n" +
           "Have fun!"
@@ -203,8 +203,8 @@ export function DAG(props) {
           'text-halign': 'right',
           'font-size': 10,
           'color': '#35393e',
-          'background-color': '#39b867',
-          'border-color': '#000',
+          'background-color': '#2fc1d3',
+          'border-color': '#fff',
           'border-width': 1,
           'border-opacity': 0.8
         }
@@ -223,21 +223,21 @@ export function DAG(props) {
         selector: ':parent[type = "Table"], :parent[type = "Path"]',
         style: {
           'background-color': '#f5f5f5',
-          'border-color': '#0e6c00',
+          'border-color': '#1a84a8',
         }
       },
       {
         selector: ':parent[type = "SubQuery"]',
         style: {
           'background-color': '#f5f5f5',
-          'border-color': '#de8b68',
+          'border-color': '#b46c4f',
         }
       },
       {
         selector: ':parent[type = "Table or SubQuery"]',
         style: {
           'background-color': '#f5f5f5',
-          'border-color': '#e79575',
+          'border-color': '#b46c4f',
           'border-style': 'dashed',
         }
       },
@@ -246,7 +246,7 @@ export function DAG(props) {
         style: {
           width: 1,
           'line-color': '#9ab5c7',
-          'target-arrow-color': '#abd0e7',
+          'target-arrow-color': '#9ab5c7',
           'target-arrow-shape': 'triangle',
           'arrow-scale': 0.8,
           'curve-style': 'unbundled-bezier',
@@ -261,7 +261,7 @@ export function DAG(props) {
       {
         selector: '.highlight_locked',
         style: {
-          'background-color': '#ee5b6c',
+          'background-color': '#e99708',
         }
       },
       {

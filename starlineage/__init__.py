@@ -1,5 +1,5 @@
 NAME = "starlineage"
-VERSION = "1.0.3"
+VERSION = "1.0.6"
 DEFAULT_LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

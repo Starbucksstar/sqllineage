@@ -43,6 +43,18 @@ Target Tables:
     db1.table1
 ```
 
+Using starlineage command to parse multiple quoted-query-string:
+```
+$ starlineage -e "insert into db1.table1 select * from db2.table2" "insert into db1.table1 select * from db3.table3"
+Statements(#): 2
+Source Tables:
+    db2.table2
+    db3.table3
+Target Tables:
+    db1.table1
+```
+
+
 Or you can parse a SQL file with -f option:
 ```
 $ starlineage -f foo.sql
@@ -201,6 +213,7 @@ Check for more details on SQLLineage [MetaData](https://sqllineage.readthedocs.i
 ### Lineage Visualization
 One more cool feature, if you want a graph visualization for the lineage result, toggle graph-visualization option
 
+#### 1.file lineage 
 Still using the above SQL file
 ```
 sqllineage -g -f foo.sql
@@ -214,3 +227,12 @@ A webserver will be started, showing DAG representation of the lineage result in
 - Column-Level Lineage
 
 <img src="https://raw.githubusercontent.com/reata/sqllineage/master/docs/_static/column.jpg" alt="Column-Level Lineage">
+
+#### 2.multiple sql lineage
+```
+sqllineage -g -e "insert into db1.table1 select * from db2.table2" "insert into db1.table1 select * from db3.table3"
+```
+- Table-Level Lineage
+![img.png](img.png)
+- Column-Level Lineage
+![img_1.png](img_1.png)
