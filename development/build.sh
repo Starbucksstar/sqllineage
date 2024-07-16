@@ -17,3 +17,6 @@ python setup.py sdist bdist_wheel
 
 echo "start upload package into pypi"
 twine upload dist/*
+
+echo "start clean up the project"
+rm -rf .coverage* *.db build dist starlineage.egg-info || { echo "Cleanup failed"; exit 1; }
